@@ -6,6 +6,7 @@ export enum ErrorCode {
   Refresh_Token_Invalid = 'Refresh_Token_Invalid',
   Access_Token_Invalid = 'Access_Token_Invalid',
   Token_Not_Exist = 'Token_Not_Exist',
+  Forbidden_Resource = 'Forbidden_Resource',
 }
 
 export enum UserType {

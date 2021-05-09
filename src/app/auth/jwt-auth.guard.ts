@@ -1,17 +1,9 @@
-import { ExecutionContext, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContext, HttpStatus, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { SetMetadata } from '@nestjs/common';
 import { Exception } from '$helpers/exception';
 import { ErrorCode } from '$types/enums';
-
-export const IS_PUBLIC_KEY = 'isPublic';
-/**
- * Mark this as the public API
- *
- * Put it before the method you want to ignore JwtAuthGuard.
- */
-export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
+import { IS_PUBLIC_KEY } from 'decorators/public.decorator';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

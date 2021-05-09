@@ -16,7 +16,7 @@
       "$database/*": ["database/*"],
       "$middlewares/*": ["middlewares/*"],
       "$app/*": ["app/*"],
-      "$validators/*": ["validators/*"],
+      "$decorators/*": ["decorators/*"],
       "$helpers/*": ["helpers/*"],
       "$types/*": ["types/*"],
       "$config": ["config"],

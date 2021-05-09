@@ -7,6 +7,12 @@ declare namespace Express {
       id: number;
       type: number;
     };
-    user?: Express.User;
+  }
+
+  interface User {
+    id: number;
+    tokenType: number;
+    userType: number;
+    roles: string[];
   }
 }

@@ -98,7 +98,6 @@ export class AuthService {
     Object.assign(payload, { tokenType: JWTType.ACCESS_TOKEN });
 
     return this.jwtService.sign(payload, {
-      secret: config.auth.secretKey,
       expiresIn: config.auth.accessTokenExpiresIn,
     });
   }

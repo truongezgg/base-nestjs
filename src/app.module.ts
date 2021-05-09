@@ -7,6 +7,7 @@ import { TransformResponseInterceptor } from '$helpers/transform.interceptor';
 import { AuthModule } from '$app/auth/auth.module';
 import { AppController } from '$app/auth/auth.controller';
 import { JwtAuthGuard } from '$app/auth/jwt-auth.guard';
+import { RolesGuard } from '$app/auth/roles.guard';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), AuthModule],
@@ -23,6 +24,10 @@ import { JwtAuthGuard } from '$app/auth/jwt-auth.guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

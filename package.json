@@ -89,7 +89,7 @@
     "$database": "dist/database",
     "$middlewares": "dist/middlewares",
     "$app": "dist/app",
-    "$validators": "dist/validators",
+    "$decorators": "dist/decorators",
     "$helpers": "distpp/helpers",
     "$types": "dist/types",
     "$config": "dist/config",

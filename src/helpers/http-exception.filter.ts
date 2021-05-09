@@ -11,16 +11,16 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     console.log(exception);
 
-    const { status, ...errorObject } = formatErrorObject(exception);
+    const { statusCode, ...errorObject } = formatErrorObject(exception);
 
-    response.status(status).json(errorObject);
+    response.status(statusCode).json(errorObject);
   }
 }
 
 export function formatErrorObject(exception: HttpException | any) {
   const errorObj = {
     success: false,
-    status: HttpStatus.BAD_REQUEST,
+    statusCode: HttpStatus.BAD_REQUEST,
     errorCode: ErrorCode.Unknown_Error,
     message: null,
   };
@@ -29,7 +29,7 @@ export function formatErrorObject(exception: HttpException | any) {
     const data = exception.getResponse() as any;
 
     if (data?.errorCode) errorObj.errorCode = data?.errorCode;
-    if (data?.status) errorObj.status = data?.status;
+    if (data?.statusCode) errorObj.statusCode = data?.statusCode;
     if (data?.message) errorObj.message = data.message;
     if (data?.devMessage) errorObj['devMessage'] = data['devMessage'];
     if (data?.payload) errorObj['payload'] = data['payload'];

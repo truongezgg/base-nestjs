@@ -1,4 +1,7 @@
 export default {
+  server: {
+    port: Number(process.env.PORT) || 3000,
+  },
   auth: {
     secretKey: process.env.AUTH_SECRET_KEY,
     accessTokenExpiresIn: process.env.AUTH_ACCESS_TOKEN_EXPIRES_IN,
