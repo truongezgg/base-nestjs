@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import config from '$config';
 import { UserType, ErrorCode, JWTType } from '$types/enums';
 import { EntityManager, getConnection, getRepository, Repository } from 'typeorm';
-import User from '$database/entities/user.entity';
+import User from '$database/entities/User';
 import { Exception } from '$helpers/exception';
 import { compare, hash } from 'bcrypt';
 import { RegisterAuthDto, RequestAccessTokenDto } from './auth.dto';
