@@ -1,6 +1,6 @@
 import AJV, { JSONSchemaType } from 'ajv';
 import { ErrorCode } from '$types/enums';
-import { CustomHttpException } from './exception';
+import { Exception } from './exception';
 import { HttpStatus } from '@nestjs/common';
 import addFormats from 'ajv-formats';
 
@@ -18,10 +18,6 @@ export function validate(schemaKeyRef: AjvSchema | any, data: any) {
   const validate = Ajv.validate(schemaKeyRef, data);
 
   if (!validate) {
-    throw new CustomHttpException({
-      errorCode: ErrorCode.Invalid_Input,
-      devMessage: Ajv.errors,
-      status: HttpStatus.UNPROCESSABLE_ENTITY,
-    });
+    throw new Exception(ErrorCode.Invalid_Input, Ajv.errors, HttpStatus.UNPROCESSABLE_ENTITY);
   }
 }

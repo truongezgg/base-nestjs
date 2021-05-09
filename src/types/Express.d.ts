@@ -7,5 +7,6 @@ declare namespace Express {
       id: number;
       type: number;
     };
+    user?: Express.User;
   }
 }

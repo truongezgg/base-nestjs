@@ -10,7 +10,7 @@ module.exports = {
   logging: true,
   charset: 'utf8mb4',
   migrationsTableName: 'migration',
-  entities: ['dist/app/**/entities/**/*.js'],
+  entities: ['dist/database/entities/**/*.js'],
   migrations: ['dist/database/migrations/**/*.js'],
   subscribers: ['dist/database/subscribers/**/*.js'],
   timezone: 'Z',

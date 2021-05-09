@@ -11,11 +11,9 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "incremental": true,
-    "rootTypes": ["./src/types"],
+    "rootTypes": ["./src/types", "node_modules/@types"],
     "paths": {
-      "$entities/*": ["app/database/entities/*"],
-      "$migrations/*": ["database/migrations/*"],
-      "$subscribers/*": ["database/subscribers/*"],
+      "$database/*": ["database/*"],
       "$middlewares/*": ["middlewares/*"],
       "$app/*": ["app/*"],
       "$validators/*": ["validators/*"],

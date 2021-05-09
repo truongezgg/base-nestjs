@@ -8,6 +8,11 @@ export enum ErrorCode {
   Token_Not_Exist = 'Token_Not_Exist',
 }
 
-export enum AuthenticationType {
-  User = 1,
+export enum UserType {
+  USER = 1,
+}
+
+export enum JWTType {
+  ACCESS_TOKEN = 1,
+  REFRESH_TOKEN = 2,
 }

@@ -1,5 +1,6 @@
+import { ErrorCode } from '$types/enums';
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { CustomHttpException } from './exception';
+import { Exception } from './exception';
 import { validate } from './validate';
 
 @Injectable()
@@ -8,9 +9,7 @@ export class CustomParseIntPipe implements PipeTransform {
     value = parseInt(value, 10);
 
     if (isNaN(value)) {
-      throw new CustomHttpException({
-        errorCode: 'Unknow_Error',
-      });
+      throw new Exception(ErrorCode.Invalid_Input, 'You have provided invalid params.');
     }
 
     return value;
@@ -18,7 +17,7 @@ export class CustomParseIntPipe implements PipeTransform {
 }
 
 @Injectable()
-export class ValidationPipe implements PipeTransform {
+export class Validate implements PipeTransform {
   private schemaRef: AjvSchema;
 
   constructor(schemaRef: AjvSchema) {

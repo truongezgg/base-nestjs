@@ -1,6 +1,11 @@
-import { AuthenticationType } from '$types/enums';
+import { UserType } from '$types/enums';
 
 export interface IPayload {
   id: number;
-  type: AuthenticationType;
+  type: UserType;
+}
+
+export interface IToken {
+  token: string;
+  refreshToken: string;
 }

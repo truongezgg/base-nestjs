@@ -1,18 +1,16 @@
-import cors from 'cors';
-import helmet from 'helmet';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerMiddleware } from '$middlewares/logger.middleware';
 import { AllExceptionsFilter } from '$helpers/http-exception.filter';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { AuthenticationModule } from '$app/authentication/authentication.module';
-import { AuthenticationMiddleware } from '$middlewares/authentication.middleware';
 import { TransformResponseInterceptor } from '$helpers/transform.interceptor';
-import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from '$app/auth/auth.module';
+import { AppController } from '$app/auth/auth.controller';
+import { JwtAuthGuard } from '$app/auth/jwt-auth.guard';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), JwtModule.register({}), AuthenticationModule],
-  controllers: [],
+  imports: [TypeOrmModule.forRoot(), AuthModule],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_FILTER,
@@ -22,15 +20,14 @@ import { JwtModule } from '@nestjs/jwt';
       provide: APP_INTERCEPTOR,
       useClass: TransformResponseInterceptor,
     },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(cors, helmet, LoggerMiddleware).forRoutes('*');
-
-    consumer
-      .apply(AuthenticationMiddleware)
-      .exclude('authentication/(login|register|request-access-token)')
-      .forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }

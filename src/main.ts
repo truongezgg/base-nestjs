@@ -3,7 +3,7 @@ import 'module-alias/register';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { AllExceptionsFilter } from '$helpers/http-exception.filter';
+import * as helmet from 'helmet';
 
 /**
  * https://docs.nestjs.com/first-steps
@@ -29,7 +29,8 @@ import { AllExceptionsFilter } from '$helpers/http-exception.filter';
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors();
+  app.use(helmet());
 
   await app.listen(3000);
-  console.log('Server running on port 3000');
+  console.log('Server is running on port 3000');
 })();

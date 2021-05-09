@@ -9,6 +9,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = context.getResponse<Response>();
     const request = context.getRequest<Request>();
 
+    console.log(exception);
+
     const { status, ...errorObject } = formatErrorObject(exception);
 
     response.status(status).json(errorObject);
