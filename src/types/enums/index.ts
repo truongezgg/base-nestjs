@@ -17,3 +17,13 @@ export enum JWTType {
   ACCESS_TOKEN = 1,
   REFRESH_TOKEN = 2,
 }
+
+export enum Role {
+  ADMIN = 'admin',
+  USER = 'user',
+}
+
+export enum Permission {
+  CREATE_CAT = 1,
+  UPDATE_CAT = 2,
+}

@@ -8,6 +8,7 @@ import { AuthModule } from '$app/auth/auth.module';
 import { AppController } from '$app/auth/auth.controller';
 import { JwtAuthGuard } from '$app/auth/jwt-auth.guard';
 import { RolesGuard } from '$app/auth/roles.guard';
+import { PermissionsGuard } from '$app/auth/permissions.guard';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), AuthModule],
@@ -27,7 +28,7 @@ import { RolesGuard } from '$app/auth/roles.guard';
     },
     {
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: PermissionsGuard,
     },
   ],
 })
