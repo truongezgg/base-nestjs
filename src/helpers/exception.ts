@@ -37,7 +37,13 @@ export class Exception extends HttpException {
    *
    *   throw Exception("Unknown_Error", "This is devMessage", HttpStatus.BAD_REQUEST, { isSystem: true })
    */
-  constructor(errorCode: ErrorCode, devMessage?: string | any, statusCode?: HttpStatus, payload?: any) {
-    super({ errorCode, devMessage, statusCode, payload }, statusCode || HttpStatus.BAD_REQUEST);
+  constructor(errorCode: ErrorCode, devMessage?: string | HttpStatus | any, statusCode?: HttpStatus, payload?: any) {
+    const errorObject = { errorCode };
+
+    if (devMessage) errorObject['devMessage'] = devMessage;
+    if (statusCode) errorObject['statusCode'] = statusCode;
+    if (payload) errorObject['payload'] = payload;
+
+    super(errorObject, statusCode || HttpStatus.BAD_REQUEST);
   }
 }

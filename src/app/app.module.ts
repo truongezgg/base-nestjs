@@ -4,15 +4,14 @@ import { LoggerMiddleware } from '$middlewares/logger.middleware';
 import { AllExceptionsFilter } from '$helpers/http-exception.filter';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TransformResponseInterceptor } from '$helpers/transform.interceptor';
-import { AuthModule } from '$app/auth/auth.module';
-import { AppController } from '$app/auth/auth.controller';
-import { JwtAuthGuard } from '$app/auth/jwt-auth.guard';
-import { RolesGuard } from '$app/auth/roles.guard';
-import { PermissionsGuard } from '$app/auth/permissions.guard';
+import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
+import { PermissionsGuard } from '$app/shared/auth/permissions.guard';
+import { SharedModule } from '$shared/shared.module';
+import { AdminModule } from '$admin/admin.module';
+import { ClientModule } from '$client/client.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), AuthModule],
-  controllers: [AppController],
+  imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule],
   providers: [
     {
       provide: APP_FILTER,

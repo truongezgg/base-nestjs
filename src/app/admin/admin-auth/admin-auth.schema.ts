@@ -1,4 +1,4 @@
-export const loginSchema: AjvSchema = {
+export const adminLoginSchema: AjvSchema = {
   type: 'object',
   required: ['email', 'password'],
   additionalProperties: false,
@@ -15,7 +15,7 @@ export const loginSchema: AjvSchema = {
   },
 };
 
-export const registerSchema: AjvSchema = {
+export const adminRegisterSchema: AjvSchema = {
   type: 'object',
   required: ['email', 'password'],
   additionalProperties: false,
@@ -32,7 +32,7 @@ export const registerSchema: AjvSchema = {
   },
 };
 
-export const requestAccessTokenSchema: AjvSchema = {
+export const adminRefreshTokenSchema: AjvSchema = {
   type: 'object',
   required: ['refreshToken'],
   additionalProperties: false,

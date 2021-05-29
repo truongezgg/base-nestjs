@@ -10,17 +10,18 @@ export enum ErrorCode {
 }
 
 export enum UserType {
-  USER = 1,
+  CLIENT = 'CLIENT',
+  ADMIN = 'ADMIN',
 }
 
 export enum JWTType {
-  ACCESS_TOKEN = 1,
-  REFRESH_TOKEN = 2,
+  ACCESS_TOKEN = 'ACCESS_TOKEN',
+  REFRESH_TOKEN = 'REFRESH_TOKEN',
 }
 
 export enum Role {
-  ADMIN = 'admin',
-  USER = 'user',
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }
 
 export enum Permission {

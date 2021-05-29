@@ -2,9 +2,9 @@ require('dotenv').config();
 import 'module-alias/register';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AppModule } from './app.module';
 import * as helmet from 'helmet';
-import config from '$config';
+import CONFIG from '$config';
+import { AppModule } from '$app/app.module';
 
 /**
  * https://docs.nestjs.com/first-steps
@@ -32,6 +32,6 @@ import config from '$config';
   app.enableCors();
   app.use(helmet());
 
-  await app.listen(config.server.port);
-  console.log(`Server is running on port ${config.server.port}`);
+  await app.listen(CONFIG.SERVER_PORT);
+  console.log(`Server is running on port ${CONFIG.SERVER_PORT}`);
 })();

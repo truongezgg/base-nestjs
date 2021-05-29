@@ -6,13 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import config from '$config';
 
 @Module({
-  imports: [
-    PassportModule,
-    JwtModule.register({
-      signOptions: { algorithm: 'HS256' },
-      secret: config.auth.secretKey,
-    }),
-  ],
+  imports: [PassportModule, JwtModule.register({})],
   providers: [AuthService, JwtStrategy],
   exports: [AuthService],
 })
