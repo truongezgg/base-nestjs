@@ -1,8 +1,9 @@
-import { UserType } from '$types/enums';
+import { TokenType, UserType } from '$types/enums';
 
 export interface IPayload {
   id: number;
-  type: UserType;
+  userType: UserType;
+  tokenType?: TokenType;
 }
 
 export interface IToken {

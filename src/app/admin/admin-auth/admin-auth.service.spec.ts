@@ -1,12 +1,13 @@
+import { AuthService } from '$app/shared/auth/auth.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdminAuthService } from '../admin-auth/admin-auth.service';
+import { AdminAuthService } from './admin-auth.service';
 
-describe('AdminAuthResourceService', () => {
+describe('AdminAuthService', () => {
   let service: AdminAuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AdminAuthService],
+      providers: [AuthService, AdminAuthService],
     }).compile();
 
     service = module.get<AdminAuthService>(AdminAuthService);

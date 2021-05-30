@@ -82,7 +82,18 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^\\$config": "<rootDir>/config",
+      "^\\$decorators/(.*)$": "<rootDir>/decorators/$1",
+      "^\\$helpers/(.*)$": "<rootDir>/helpers/$1",
+      "^\\$types/(.*)$": "<rootDir>/types/$1",
+      "^\\$database/(.*)$": "<rootDir>/database/$1",
+      "^\\$shared/(.*)$": "<rootDir>/app/shared/$1",
+      "^\\$admin/(.*)$": "<rootDir>/app/admin/$1",
+      "^\\$client/(.*)$": "<rootDir>/app/client/$1",
+      "^\\$app/(.*)$": "<rootDir>/app/$1"
+    }
   },
   "_moduleAliases": {
     "$database": "dist/database",

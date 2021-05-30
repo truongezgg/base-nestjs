@@ -3,7 +3,7 @@ import 'module-alias/register';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as helmet from 'helmet';
-import CONFIG from '$config';
+import config from '$config';
 import { AppModule } from '$app/app.module';
 
 /**
@@ -32,6 +32,6 @@ import { AppModule } from '$app/app.module';
   app.enableCors();
   app.use(helmet());
 
-  await app.listen(CONFIG.SERVER_PORT);
-  console.log(`Server is running on port ${CONFIG.SERVER_PORT}`);
+  await app.listen(config.SERVER_PORT);
+  console.log(`Server is running on port ${config.SERVER_PORT}`);
 })();
