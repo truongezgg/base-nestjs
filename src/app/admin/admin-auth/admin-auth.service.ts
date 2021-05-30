@@ -6,17 +6,16 @@ import User from '$database/entities/User';
 import { Exception } from '$helpers/exception';
 import { compare, hash } from 'bcrypt';
 import { AdminRegisterDto } from './dto/admin-register.dto';
-import { AdminRefreshTokenDto } from './dto/admin-refresh-token.dto';
 import { AuthService } from '$shared/auth/auth.service';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AdminAuthService {
   constructor(
-    private authService: AuthService,
-    private connection: Connection,
+    private readonly authService: AuthService,
+    private readonly connection: Connection,
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async login({ email, password }) {
@@ -33,8 +32,8 @@ export class AdminAuthService {
     return await this.connection.transaction(async (transaction) => {
       const userRepository = transaction.getRepository(User);
 
-      const isAnyUserHasEmail = await this.checkIsAnyUserHasEmail(email, userRepository);
-      if (isAnyUserHasEmail) throw new Exception(ErrorCode.Email_Already_Exist);
+      const isEmailExists = await this.isEmailExists(email, userRepository);
+      if (isEmailExists) throw new Exception(ErrorCode.Email_Already_Exist);
 
       const hashedPassword = await hash(password, config.BCRYPT_HASH_ROUNDS);
       const user = await userRepository.save({ email, password: hashedPassword });
@@ -43,7 +42,7 @@ export class AdminAuthService {
     });
   }
 
-  async refreshToken({ refreshToken }: AdminRefreshTokenDto) {
+  async refreshToken(refreshToken: string) {
     const payload = this.authService.verifyRefreshToken(refreshToken);
     if (!payload) throw new Exception(ErrorCode.Refresh_Token_Invalid, 'Invalid token.', HttpStatus.UNAUTHORIZED);
 
@@ -51,7 +50,7 @@ export class AdminAuthService {
     return await this.generateToken(this.userRepository, user);
   }
 
-  async checkIsAnyUserHasEmail(email: string, userRepository?: Repository<User>) {
+  async isEmailExists(email: string, userRepository?: Repository<User>) {
     userRepository = userRepository || this.userRepository;
 
     const isExist = await userRepository.findOne({ where: { email }, select: ['id'] });
@@ -60,7 +59,6 @@ export class AdminAuthService {
 
   async generateToken(userRepository: Repository<User>, user: User) {
     const payload = { id: user.id, userType: UserType.ADMIN };
-    const refreshToken = user.refreshToken;
 
     const token = this.authService.generateAccessToken(payload);
 
@@ -68,11 +66,12 @@ export class AdminAuthService {
 
     if (!isValidRefreshToken) {
       const newRefreshToken = this.authService.generateRefreshToken(payload);
+
       await userRepository.update(user.id, { refreshToken: newRefreshToken });
 
       return { token, refreshToken: newRefreshToken };
     }
 
-    return { token, refreshToken };
+    return { token, refreshToken: user.refreshToken };
   }
 }

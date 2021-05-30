@@ -1,16 +1,15 @@
 import { Public } from '$decorators/public.decorator';
 import { validate } from '$helpers/validate';
 import { IToken } from '$types/interfaces';
-import { Body, Controller, Post } from '@nestjs/common';
-import { adminLoginSchema, adminRefreshTokenSchema, adminRegisterSchema } from './admin-auth.schema';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { adminLoginSchema, adminRegisterSchema } from './admin-auth.schema';
 import { AdminAuthService } from './admin-auth.service';
 import { AdminLoginDto } from './dto/admin-login.dto';
-import { AdminRefreshTokenDto } from './dto/admin-refresh-token.dto';
 import { AdminRegisterDto } from './dto/admin-register.dto';
 
 @Controller('admin-auth')
 export class AdminAuthController {
-  constructor(private adminAuthService: AdminAuthService) {}
+  constructor(private readonly adminAuthService: AdminAuthService) {}
 
   @Public()
   @Post('/login')
@@ -28,8 +27,18 @@ export class AdminAuthController {
 
   @Public()
   @Post('/refresh-token')
-  async refreshToken(@Body() body: AdminRefreshTokenDto) {
-    validate(adminRefreshTokenSchema, body);
-    return await this.adminAuthService.refreshToken(body);
+  async refreshToken(@Body('refreshToken') refreshToken: string) {
+    validate({ type: 'string', minLength: 1 }, refreshToken);
+
+    return await this.adminAuthService.refreshToken(refreshToken);
+  }
+
+  @Public()
+  @Get('/is-email-exists')
+  async checkIsAnyUserHasEmail(@Query('email') email: string) {
+    validate({ format: 'email', type: 'string' }, email);
+
+    const isEmailExists = await this.adminAuthService.isEmailExists(email);
+    return { isEmailExists };
   }
 }

@@ -5,12 +5,7 @@ export default class User {
   @PrimaryGeneratedColumn({ name: 'id', type: 'bigint', unsigned: true })
   id: number;
 
-  @Column({
-    name: 'email',
-    type: 'varchar',
-    length: 255,
-    comment: 'Email of the user.',
-  })
+  @Column({ name: 'email', type: 'varchar', length: 255, unique: true })
   email?: string;
 
   @Column({ name: 'password', type: 'varchar', length: 100, select: false })
@@ -21,7 +16,6 @@ export default class User {
     type: 'tinyint',
     default: 1,
     comment: '1: Active, 0: Inactive, 2: Not verify',
-    nullable: true,
   })
   status?: number;
 
@@ -39,7 +33,6 @@ export default class User {
     type: 'text',
     nullable: true,
     select: false,
-    comment: 'Full name of the user.',
   })
   refreshToken?: string;
 

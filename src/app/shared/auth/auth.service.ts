@@ -6,8 +6,9 @@ import { IPayload } from '$types/interfaces';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
-  generateAccessToken(payload: IPayload): string {
+  constructor(private readonly jwtService: JwtService) {}
+
+  public generateAccessToken(payload: IPayload): string {
     Object.assign(payload, { tokenType: TokenType.ACCESS_TOKEN });
 
     return this.jwtService.sign(payload, {
@@ -16,7 +17,7 @@ export class AuthService {
     });
   }
 
-  generateRefreshToken(payload: IPayload): string {
+  public generateRefreshToken(payload: IPayload): string {
     Object.assign(payload, { tokenType: TokenType.REFRESH_TOKEN });
 
     return this.jwtService.sign(payload, {
@@ -25,7 +26,7 @@ export class AuthService {
     });
   }
 
-  verifyAccessToken(accessToken: string) {
+  public verifyAccessToken(accessToken: string) {
     try {
       const payload = this.jwtService.verify(accessToken, { secret: config.JWT_SECRET_KEY });
       return payload?.tokenType === TokenType.ACCESS_TOKEN ? payload : false;
@@ -34,7 +35,7 @@ export class AuthService {
     }
   }
 
-  verifyRefreshToken(refreshToken: string) {
+  public verifyRefreshToken(refreshToken: string) {
     try {
       const payload = this.jwtService.verify(refreshToken, { secret: config.JWT_SECRET_KEY });
 

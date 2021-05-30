@@ -31,15 +31,3 @@ export const adminRegisterSchema: AjvSchema = {
     },
   },
 };
-
-export const adminRefreshTokenSchema: AjvSchema = {
-  type: 'object',
-  required: ['refreshToken'],
-  additionalProperties: false,
-  properties: {
-    refreshToken: {
-      type: 'string',
-      minLength: 1,
-    },
-  },
-};
