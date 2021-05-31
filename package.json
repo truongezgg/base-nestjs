@@ -97,16 +97,13 @@
   },
   "_moduleAliases": {
     "$database": "dist/database",
-    "$middlewares": "dist/middlewares",
+    "$core": "dist/core",
     "$app": "dist/app",
     "$shared": "dist/app/shared",
     "$admin": "dist/app/admin",
     "$client": "dist/app/client",
-    "$decorators": "dist/decorators",
     "$helpers": "distpp/helpers",
     "$types": "dist/types",
-    "$config": "dist/config",
-    "$enums": "dist/app/enums",
-    "$modules": "dist/app/modules"
+    "$config": "dist/config"
   }
 }

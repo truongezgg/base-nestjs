@@ -24,7 +24,4 @@ export enum Role {
   USER = 'USER',
 }
 
-export enum Permission {
-  CREATE_CAT = 1,
-  UPDATE_CAT = 2,
-}
+export enum Permission {}
