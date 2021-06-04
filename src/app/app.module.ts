@@ -1,9 +1,9 @@
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoggerMiddleware } from '$middlewares/logger.middleware';
+import { LoggerMiddleware } from '$core/middlewares/logger.middleware';
 import { AllExceptionsFilter } from '$helpers/http-exception.filter';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { TransformResponseInterceptor } from '$helpers/transform.interceptor';
+import { TransformResponseInterceptor } from '$core/interceptors/transform-res.interceptor';
 import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
 import { PermissionsGuard } from '$app/shared/auth/permissions.guard';
 import { SharedModule } from '$shared/shared.module';

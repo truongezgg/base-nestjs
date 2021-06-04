@@ -1,5 +1,5 @@
-import { IS_PUBLIC_KEY } from '$decorators/public.decorator';
-import { ROLES_KEY } from '$decorators/roles.decorator';
+import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
+import { ROLES_KEY } from '$core/decorators/roles.decorator';
 import { Exception } from '$helpers/exception';
 import { ErrorCode, Role } from '$types/enums';
 import { Injectable, CanActivate, ExecutionContext, HttpStatus } from '@nestjs/common';

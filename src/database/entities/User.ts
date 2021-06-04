@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import UserPermission from './UserPermission';
 
 @Entity('user')
 export default class User {
@@ -30,7 +39,8 @@ export default class User {
 
   @Column({
     name: 'refresh_token',
-    type: 'text',
+    type: 'varchar',
+    length: 500,
     nullable: true,
     select: false,
   })
@@ -41,4 +51,8 @@ export default class User {
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt?: string;
+
+  @OneToMany((type) => UserPermission, (userPermission) => userPermission.user)
+  @JoinColumn({ name: 'id', referencedColumnName: 'user_id' })
+  userPermission: UserPermission[];
 }

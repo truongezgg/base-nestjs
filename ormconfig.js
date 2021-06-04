@@ -15,7 +15,7 @@ module.exports = {
   subscribers: ['dist/database/subscribers/**/*.js'],
   timezone: 'Z',
   cli: {
-    entitiesDir: 'src/app/**/entities',
+    entitiesDir: 'src/database/entities',
     migrationsDir: 'src/database/migrations',
     subscribersDir: 'src/database/subscribers',
   },

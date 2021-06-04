@@ -8,6 +8,7 @@ import { compare, hash } from 'bcrypt';
 import { AdminRegisterDto } from './dto/admin-register.dto';
 import { AuthService } from '$shared/auth/auth.service';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IToken } from '$types/interfaces';
 
 @Injectable()
 export class AdminAuthService {
@@ -18,7 +19,7 @@ export class AdminAuthService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async login({ email, password }) {
+  async login({ email, password }): Promise<IToken> {
     const user = await this.userRepository.findOne({ where: { email }, select: ['id', 'password', 'refreshToken'] });
     if (!user) throw new Exception(ErrorCode.Email_Or_Password_Not_valid);
 
@@ -28,7 +29,7 @@ export class AdminAuthService {
     return await this.generateToken(this.userRepository, user);
   }
 
-  async register({ email, password }: AdminRegisterDto) {
+  async register({ email, password }: AdminRegisterDto): Promise<IToken> {
     return await this.connection.transaction(async (transaction) => {
       const userRepository = transaction.getRepository(User);
 
@@ -42,7 +43,7 @@ export class AdminAuthService {
     });
   }
 
-  async refreshToken(refreshToken: string) {
+  async refreshToken(refreshToken: string): Promise<IToken> {
     const payload = this.authService.verifyRefreshToken(refreshToken);
     if (!payload) throw new Exception(ErrorCode.Refresh_Token_Invalid, 'Invalid token.', HttpStatus.UNAUTHORIZED);
 
@@ -50,14 +51,14 @@ export class AdminAuthService {
     return await this.generateToken(this.userRepository, user);
   }
 
-  async isEmailExists(email: string, userRepository?: Repository<User>) {
+  async isEmailExists(email: string, userRepository?: Repository<User>): Promise<boolean> {
     userRepository = userRepository || this.userRepository;
 
     const isExist = await userRepository.findOne({ where: { email }, select: ['id'] });
     return !!isExist;
   }
 
-  async generateToken(userRepository: Repository<User>, user: User) {
+  async generateToken(userRepository: Repository<User>, user: User): Promise<IToken> {
     const payload = { id: user.id, userType: UserType.ADMIN };
 
     const token = this.authService.generateAccessToken(payload);

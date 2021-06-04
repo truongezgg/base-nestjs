@@ -14,18 +14,15 @@
     "typeRoots": ["./src/types", "node_modules/@types"],
     "types": ["node", "jest", "express"],
     "paths": {
-      "$database/*": ["database/*"],
-      "$middlewares/*": ["middlewares/*"],
       "$app/*": ["app/*"],
       "$shared*": ["app/shared/*"],
       "$admin*": ["app/admin/*"],
       "$client*": ["app/client/*"],
-      "$decorators/*": ["decorators/*"],
+      "$core/*": ["core/*"],
+      "$database/*": ["database/*"],
       "$helpers/*": ["helpers/*"],
       "$types/*": ["types/*"],
-      "$config": ["config"],
-      "$enums/*": ["app/enums/*"],
-      "$modules/*": ["app/modules/*"]
+      "$config": ["config"]
     }
   }
 }
