@@ -2,8 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AdminAuthController } from './admin-auth.controller';
 import { AdminAuthService } from './admin-auth.service';
 
-const testCat1 = 'Test Cat 1';
-const testBreed1 = 'Test Breed 1';
 const token = 'dummy token';
 const refreshToken = 'dummy refresh token';
 
@@ -24,15 +22,6 @@ describe('AdminAuthController', () => {
           useValue: {
             login: jest.fn().mockImplementation((email: string, password: string) => {
               return Promise.resolve({ token, refreshToken });
-            }),
-            register: jest.fn().mockImplementation((email: string, password: string) => {
-              return Promise.resolve({ token, refreshToken });
-            }),
-            refreshToken: jest.fn().mockImplementation((refreshToken: string) => {
-              return Promise.resolve({ token, refreshToken });
-            }),
-            checkIsAnyUserHasEmail: jest.fn().mockImplementation((email: string) => {
-              return Promise.resolve({ isEmailExists: true });
             }),
           },
         },
@@ -59,12 +48,4 @@ describe('AdminAuthController', () => {
       });
     });
   });
-
-  // describe('findAll', () => {
-  //   it('should return an array of cats', async () => {
-  //     const result = { token: '', refreshToken: '' };
-  //     jest.spyOn(adminAthuService, 'login').mockImplementation(async () => result);
-  //     expect(await adminAuthController.login({ email: 'truongezgg@gmail.com', password: '1234567' })).toBe(result);
-  //   });
-  // });
 });

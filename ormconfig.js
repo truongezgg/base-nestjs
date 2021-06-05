@@ -5,7 +5,7 @@ module.exports = {
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASS,
   database: process.env.MYSQL_NAME,
-  supportBigNumbers: false,
+  supportBigNumbers: true,
   synchronize: true, // Alway use migration.
   logging: true,
   charset: 'utf8mb4',
