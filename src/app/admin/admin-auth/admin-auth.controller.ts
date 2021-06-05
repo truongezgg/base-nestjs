@@ -27,9 +27,10 @@ export class AdminAuthController {
 
   @Public()
   @Post('refresh-token')
-  async refreshToken(@Body('refreshToken') refreshToken: string): Promise<IToken> {
+  async refreshToken(@Body('refreshToken') refreshToken: string): Promise<{ token: string }> {
     validate({ type: 'string', minLength: 1 }, refreshToken);
-    return await this.adminAuthService.refreshToken(refreshToken);
+    const token = await this.adminAuthService.refreshToken(refreshToken);
+    return { token };
   }
 
   @Public()

@@ -92,7 +92,8 @@
       "^\\$shared/(.*)$": "<rootDir>/app/shared/$1",
       "^\\$admin/(.*)$": "<rootDir>/app/admin/$1",
       "^\\$client/(.*)$": "<rootDir>/app/client/$1",
-      "^\\$app/(.*)$": "<rootDir>/app/$1"
+      "^\\$app/(.*)$": "<rootDir>/app/$1",
+      "^\\$core/(.*)$": "<rootDir>/core/$1"
     }
   },
   "_moduleAliases": {

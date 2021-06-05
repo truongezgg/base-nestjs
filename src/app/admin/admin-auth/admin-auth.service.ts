@@ -43,12 +43,13 @@ export class AdminAuthService {
     });
   }
 
-  async refreshToken(refreshToken: string): Promise<IToken> {
+  async refreshToken(refreshToken: string): Promise<string> {
     const payload = this.authService.verifyRefreshToken(refreshToken);
     if (!payload) throw new Exception(ErrorCode.Refresh_Token_Invalid, 'Invalid token.', HttpStatus.UNAUTHORIZED);
 
     const user = await this.userRepository.findOne({ where: { id: payload.id }, select: ['id', 'refreshToken'] });
-    return await this.generateToken(this.userRepository, user);
+    const result = await this.generateToken(this.userRepository, user);
+    return result?.token;
   }
 
   async isEmailExists(email: string, userRepository?: Repository<User>): Promise<boolean> {

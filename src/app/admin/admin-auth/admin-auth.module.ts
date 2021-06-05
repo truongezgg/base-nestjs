@@ -7,7 +7,6 @@ import { AdminAuthService } from './admin-auth.service';
 
 @Module({
   imports: [AuthModule, TypeOrmModule.forFeature([User])],
-  exports: [TypeOrmModule],
   controllers: [AdminAuthController],
   providers: [AdminAuthService],
 })
