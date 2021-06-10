@@ -1,0 +1,30 @@
+version: "3.4"
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: ${RESTART}
+    container_name: nestjs-base_mysql
+    ports:
+      - ${MYSQL_PORT}:3306
+    volumes:
+      - amela-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+
+  redis:
+    image: redis:latest
+    restart: ${RESTART}
+    container_name: nestjs-base_redis
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes: 
+      - amela-redis-data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASS}
+
+volumes:
+  amela-mysql-data:
+  amela-redis-data:
