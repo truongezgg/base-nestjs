@@ -7,16 +7,11 @@ import User from '$database/entities/User';
 import { AdminModule } from '$app/admin/admin.module';
 import { ClientModule } from '$app/client/client.module';
 import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
-import { PermissionsGuard } from '$app/shared/auth/permissions.guard';
+import { PermissionsGuard } from '$app/shared/authorization/permissions.guard';
 import { SharedModule } from '$app/shared/shared.module';
 import { TransformResponseInterceptor } from '$core/interceptors/transform-res.interceptor';
 import { AllExceptionsFilter } from '$helpers/http-exception.filter';
 import { APP_FILTER, APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
-import Permission from '$database/entities/Permission';
-import UserPermission from '$database/entities/UserPermission';
-import PermissionGroup from '$database/entities/PermissionGroup';
-import Role from '$database/entities/Role';
-import RolePermission from '$database/entities/RolePermission';
 import { AuthService } from '$app/shared/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { IToken } from '$types/interfaces';
@@ -50,7 +45,7 @@ describe('App (e2e)', () => {
           synchronize: false, // Alway use migration.
           logging: false,
           charset: 'utf8mb4',
-          entities: [User, Permission, UserPermission, PermissionGroup, Role, RolePermission],
+          entities: [User],
         }),
         SharedModule,
         AdminModule,

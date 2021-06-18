@@ -1,4 +1,4 @@
-import { Permission, Role } from '$types/enums';
+import { Permissions } from '$types/enums';
 import { SetMetadata } from '@nestjs/common';
 
 export const PERMISSIONS_KEY = 'permissions';
@@ -7,4 +7,4 @@ export const PERMISSIONS_KEY = 'permissions';
  * @param permissions
  * @returns
  */
-export const RequirePermissions = (...permissions: Permission[]) => SetMetadata(PERMISSIONS_KEY, permissions);
+export const RequirePermissions = (...permissions: Permissions[]) => SetMetadata(PERMISSIONS_KEY, permissions);

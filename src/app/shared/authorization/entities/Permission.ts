@@ -1,6 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import PermissionGroup from './PermissionGroup';
-import User from './User';
 @Entity('permission')
 export default class Permission {
   @PrimaryGeneratedColumn({ name: 'id', type: 'int', unsigned: true })

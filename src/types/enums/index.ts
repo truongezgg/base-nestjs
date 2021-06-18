@@ -1,6 +1,7 @@
 export enum ErrorCode {
   Unknown_Error = 'Unknown_Error',
   Invalid_Input = 'Invalid_Input',
+  Not_Found = 'Not_Found',
   Email_Or_Password_Not_valid = 'Email_Or_Password_Not_valid',
   Email_Already_Exist = 'Email_Already_Exist',
   Refresh_Token_Invalid = 'Refresh_Token_Invalid',
@@ -24,4 +25,13 @@ export enum Role {
   USER = 'USER',
 }
 
-export enum Permission {}
+export enum Permissions {
+  PERMISSION_MANAGEMENT = 1,
+}
+
+export enum CommonStatus {
+  ACTIVE = 1,
+  INACTIVE = 0,
+  NOT_VERIFY = 2,
+  REJECTED = 3,
+}
