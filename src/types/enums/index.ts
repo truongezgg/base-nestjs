@@ -7,6 +7,7 @@ export enum ErrorCode {
   Token_Not_Exist = 'Token_Not_Exist',
   Forbidden_Resource = 'Forbidden_Resource',
   Unauthorized = 'Unauthorized',
+  Resource_Already_Exists = 'Resource_Already_Exists',
 }
 
 export enum UserType {
@@ -26,6 +27,8 @@ export enum Role {
 
 export enum Permissions {
   PERMISSION_MANAGEMENT = 1,
+  CONFIG_MANAGEMENT = 2,
+  RESOURCE_MANAGEMENT = 3,
 }
 
 export enum CommonStatus {
@@ -33,4 +36,10 @@ export enum CommonStatus {
   INACTIVE = 0,
   NOT_VERIFY = 2,
   REJECTED = 3,
+}
+
+export enum ResourceType {
+  TERM = 1,
+  POLICY = 2,
+  HELP = 3,
 }
