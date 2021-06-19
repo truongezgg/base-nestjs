@@ -73,7 +73,7 @@ export const updateResourceSchema: AjvSchema = {
       type: 'string',
     },
     order: {
-      type: 'string',
+      type: ['number'],
     },
   },
 };

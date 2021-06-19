@@ -36,7 +36,6 @@ export class PermissionsGuard implements CanActivate {
     // TODO: Cache this API
     // Get user permissions.
     const userPermissions = await this.authorizationService.getUserPermissions(user.id);
-    console.log(userPermissions);
 
     if (!userPermissions.some((permission: Permissions) => permissions.includes(permission))) {
       throw new Forbidden("You don't have permission to access this API!");

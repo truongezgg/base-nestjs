@@ -1,6 +1,8 @@
 import Ajv from 'ajv';
-import { Unauthorized } from './exception';
+import { Exception, Unauthorized } from './exception';
 import addFormats from 'ajv-formats';
+import { ErrorCode } from '$types/enums';
+import { HttpStatus } from '@nestjs/common';
 
 // Ex: 2021-06-19T00:00:00.000Z
 const ISOStringRegex = new RegExp(
@@ -15,5 +17,5 @@ AjvInstance.addFormat('ISOString', {
 
 export function validate(schemaKeyRef: AjvSchema | any, data: any) {
   const validate = AjvInstance.validate(schemaKeyRef, data);
-  if (!validate) throw new Unauthorized(AjvInstance.errors);
+  if (!validate) throw new Exception(ErrorCode.Invalid_Input, AjvInstance.errors, HttpStatus.UNPROCESSABLE_ENTITY);
 }

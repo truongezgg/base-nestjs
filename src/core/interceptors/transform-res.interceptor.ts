@@ -9,6 +9,20 @@ export interface Response<T> {
 @Injectable()
 export class TransformResponseInterceptor<T> implements NestInterceptor<T, Response<T>> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
-    return next.handle().pipe(map((data) => ({ data })));
+    return next.handle().pipe(
+      map((data) => {
+        if (data && data.paging === true) {
+          return {
+            data: data.data,
+            totalPages: data.totalPages,
+            pageIndex: data.pageIndex,
+            totalItems: data.totalItems,
+            hasMore: data.hasMore,
+            ...data.metadata,
+          };
+        }
+        return { data };
+      }),
+    );
   }
 }

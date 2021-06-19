@@ -28,23 +28,20 @@ export class AuthorizationController {
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async addRole(@Body() body) {
     validate(addRoleSchema, body);
-    await this.authorizationService.addRole(body.roleName);
-    return;
+    return await this.authorizationService.addRole(body.name);
   }
 
   @Put('/role/:roleId')
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async updateRole(@Body() body, @Param('roleId', ParseIntPipe) roleId: number) {
     validate(updateRoleSchema, body);
-    await this.authorizationService.updateRole(roleId, body.roleName);
-    return;
+    return await this.authorizationService.updateRole(roleId, body.name);
   }
 
   @Put('/hidden-role/:roleId')
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async hiddenRole(@Param('roleId', ParseIntPipe) roleId: number) {
-    await this.authorizationService.hiddenRole(roleId);
-    return;
+    return await this.authorizationService.hiddenRole(roleId);
   }
 
   @Put('/rolePermission/:roleId')
@@ -63,7 +60,6 @@ export class AuthorizationController {
     return permissions;
   }
 
-  // User
   @Get('/user/:userId')
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async getUserPermissions(@Param('userId', ParseIntPipe) userId: number) {

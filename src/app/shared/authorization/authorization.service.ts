@@ -45,15 +45,15 @@ export class AuthorizationService {
   }
 
   async getPermissionByGroup(permissions: Array<number>) {
-    const getListPermissions = await this.rolePermissionRepository
+    const getListPermissions = await this.permissionRepository
       .createQueryBuilder('permission')
       .select([
         'permission.id id',
         'permission.name name',
-        'permission.groupId groupId',
+        'permission.permissionGroupId permissionGroupId',
         'permissionGroup.name groupName',
       ])
-      .innerJoin(PermissionGroup, 'permissionGroup', 'permission.groupId = permissionGroup.id')
+      .innerJoin(PermissionGroup, 'permissionGroup', 'permission.permissionGroupId = permissionGroup.id')
       .getRawMany();
     const listPermissionAdvance = getListPermissions.map((item) => {
       item.hasPermission = permissions.includes(item.id) ? 1 : 0;
