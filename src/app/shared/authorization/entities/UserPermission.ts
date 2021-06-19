@@ -3,9 +3,9 @@ import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity('user_permission')
 export default class UserPermission {
-  @PrimaryColumn({ name: 'user_id', type: 'int', unsigned: true })
+  @PrimaryColumn({ name: 'user_id', type: 'bigint', unsigned: true })
   userId: number;
 
-  @PrimaryColumn({ name: 'permission_id', type: 'varchar', length: 255 })
+  @PrimaryColumn({ name: 'permission_id', type: 'int' })
   permissionId: Permissions;
 }

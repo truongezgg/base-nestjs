@@ -1,9 +1,9 @@
 export const addRoleSchema = {
   type: 'object',
-  required: ['roleName'],
+  required: ['name'],
   additionalProperties: false,
   properties: {
-    roleName: {
+    name: {
       type: 'string',
       minLength: 1,
       maxLength: 255,
@@ -13,10 +13,10 @@ export const addRoleSchema = {
 
 export const updateRoleSchema = {
   type: 'object',
-  required: ['roleName'],
+  required: ['name'],
   additionalProperties: false,
   properties: {
-    roleName: {
+    name: {
       type: 'string',
       minLength: 1,
       maxLength: 255,

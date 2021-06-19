@@ -30,7 +30,7 @@ export function formatErrorObject(exception: HttpException | any) {
     if (data?.errorCode) errorObj.errorCode = data?.errorCode;
     if (data?.statusCode) errorObj.statusCode = data?.statusCode;
     if (data?.message) errorObj.message = data.message;
-    if (data?.devMessage) errorObj['devMessage'] = data['devMessage'];
+    if (data?.error) errorObj['error'] = data['error'];
     if (data?.payload) errorObj['payload'] = data['payload'];
   }
 

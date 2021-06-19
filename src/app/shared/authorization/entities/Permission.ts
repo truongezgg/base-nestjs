@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import PermissionGroup from './PermissionGroup';
 @Entity('permission')
 export default class Permission {
@@ -12,5 +12,6 @@ export default class Permission {
   permissionGroupId: number;
 
   @ManyToOne(() => PermissionGroup, (permissionGroup) => permissionGroup.permissions)
+  @JoinColumn({ name: 'permission_group_id' })
   permissionGroup: PermissionGroup;
 }

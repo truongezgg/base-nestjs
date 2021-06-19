@@ -1,7 +1,7 @@
 import { ErrorCode } from '$types/enums';
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { Exception } from './exception';
-import { validate } from './validate';
+import { Exception } from '../../helpers/exception';
+import { validate } from '../../helpers/validate';
 
 @Injectable()
 export class CustomParseIntPipe implements PipeTransform {

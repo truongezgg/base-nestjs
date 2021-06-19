@@ -32,12 +32,12 @@ export class AuthorizationService {
     return await this.roleRepository.find({ isVisible: CommonStatus.ACTIVE });
   }
 
-  async addRole(roleName: string) {
-    return await this.roleRepository.save({ roleName });
+  async addRole(name: string) {
+    return await this.roleRepository.save({ name });
   }
 
-  async updateRole(roleId: number, roleName: string) {
-    return await this.roleRepository.update(roleId, { roleName });
+  async updateRole(roleId: number, name: string) {
+    return await this.roleRepository.update(roleId, { name });
   }
 
   async hiddenRole(roleId: number) {
@@ -116,7 +116,6 @@ export class AuthorizationService {
 
   async getUserPermissions(userId: number, userPermissionRepository?: Repository<UserPermission>) {
     userPermissionRepository = userPermissionRepository ?? this.userPermissionRepository;
-
     const userPermission = await userPermissionRepository.find({ userId });
     const permissionIds = userPermission.map((item) => item.permissionId);
 

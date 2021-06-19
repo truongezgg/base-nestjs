@@ -10,7 +10,7 @@ import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
 import { PermissionsGuard } from '$app/shared/authorization/permissions.guard';
 import { SharedModule } from '$app/shared/shared.module';
 import { TransformResponseInterceptor } from '$core/interceptors/transform-res.interceptor';
-import { AllExceptionsFilter } from '$helpers/http-exception.filter';
+import { AllExceptionsFilter } from '$core/filters/http-exception.filter';
 import { APP_FILTER, APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
 import { AuthService } from '$app/shared/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';

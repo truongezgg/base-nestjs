@@ -1,8 +1,7 @@
-import { ExecutionContext, HttpStatus, Injectable } from '@nestjs/common';
+import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { Exception } from '$helpers/exception';
-import { ErrorCode } from '$types/enums';
+import { Unauthorized } from '$helpers/exception';
 import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
 
 @Injectable()
@@ -27,13 +26,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (err) throw err;
 
     if (!user) {
-      throw new Exception(
-        ErrorCode.Access_Token_Invalid,
-        'You have provided an invalid access token',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new Unauthorized('You have provided an invalid access token');
     }
 
-    return { ...user };
+    return user;
   }
 }

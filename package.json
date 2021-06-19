@@ -103,7 +103,7 @@
     "$shared": "dist/app/shared",
     "$admin": "dist/app/admin",
     "$client": "dist/app/client",
-    "$helpers": "distpp/helpers",
+    "$helpers": "dist/helpers",
     "$types": "dist/types",
     "$config": "dist/config"
   }

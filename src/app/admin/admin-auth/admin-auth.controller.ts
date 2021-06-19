@@ -1,3 +1,4 @@
+import { RequirePermissions } from '$app/shared/authorization/permissions.decorator';
 import { Public } from '$core/decorators/public.decorator';
 import { validate } from '$helpers/validate';
 import { IToken } from '$types/interfaces';
@@ -33,7 +34,7 @@ export class AdminAuthController {
     return { token };
   }
 
-  @Public()
+  // @Public()
   @Get('is-email-exists')
   async checkIsAnyUserHasEmail(@Query('email') email: string): Promise<{ isEmailExists: boolean }> {
     validate({ format: 'email', type: 'string' }, email);

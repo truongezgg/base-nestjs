@@ -5,5 +5,6 @@ import { AdminAuthModule } from './admin-auth/admin-auth.module';
   imports: [AdminAuthModule],
   controllers: [],
   providers: [],
+  exports: [AdminAuthModule],
 })
 export class AdminModule {}
