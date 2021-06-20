@@ -2,11 +2,10 @@ export function handleOutputPaging(data: any, totalItems: number, params, metada
   return {
     data,
     totalItems,
-    paging: true,
     pageIndex: params.pageIndex,
     totalPages: Math.ceil(totalItems / params.take),
     hasMore: data ? (data.length < params.take ? false : true) : false,
-    metadata,
+    ...metadata,
   };
 }
 

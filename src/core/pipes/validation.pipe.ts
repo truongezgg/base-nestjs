@@ -1,18 +1,18 @@
 import { ErrorCode } from '$types/enums';
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { Exception } from '../../helpers/exception';
+import { Exception, UnprocessableEntity } from '../../helpers/exception';
 import { validate } from '../../helpers/validate';
 
 @Injectable()
 export class CustomParseIntPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
-    value = parseInt(value, 10);
+    const isNumeric = ['string', 'number'].includes(typeof value) && !isNaN(parseFloat(value)) && isFinite(value);
 
-    if (isNaN(value)) {
-      throw new Exception(ErrorCode.Invalid_Input, 'You have provided invalid params.');
+    if (!isNumeric) {
+      throw new UnprocessableEntity('Validation failed (numeric string is expected)');
     }
 
-    return value;
+    return parseInt(value, 10);
   }
 }
 

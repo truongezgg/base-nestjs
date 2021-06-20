@@ -1,7 +1,18 @@
 import { ErrorCode } from '$types/enums';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export class Exception extends HttpException {
+export class CustomExceptionFactory extends HttpException {
+  constructor(errorCode: ErrorCode, error?: string | HttpStatus | any, statusCode?: HttpStatus, payload?: any) {
+    const errorObject = { errorCode, statusCode: statusCode || HttpStatus.BAD_REQUEST };
+
+    if (error) errorObject['error'] = error;
+    if (payload) errorObject['payload'] = payload;
+
+    super(errorObject, errorObject.statusCode);
+  }
+}
+
+export class Exception extends CustomExceptionFactory {
   /**
    *
    * @example
@@ -15,17 +26,11 @@ export class Exception extends HttpException {
    *   throw Exception("Unknown_Error", "This is error description", HttpStatus.BAD_REQUEST, { isSystem: true })
    */
   constructor(errorCode: ErrorCode, error?: string | HttpStatus | any, statusCode?: HttpStatus, payload?: any) {
-    const errorObject = { errorCode };
-
-    if (error) errorObject['error'] = error;
-    if (statusCode) errorObject['statusCode'] = statusCode;
-    if (payload) errorObject['payload'] = payload;
-
-    super(errorObject, statusCode || HttpStatus.BAD_REQUEST);
+    super(errorCode, error, statusCode, payload);
   }
 }
 
-export class Forbidden extends HttpException {
+export class Forbidden extends CustomExceptionFactory {
   /**
    *
    * @example
@@ -40,16 +45,11 @@ export class Forbidden extends HttpException {
    *    throw Forbidden("This is error description", { payload: "This is payload" })
    */
   constructor(error?: string | HttpStatus | any, payload?: any) {
-    const errorObject = { errorCode: ErrorCode.Forbidden_Resource, statusCode: HttpStatus.FORBIDDEN };
-
-    if (error) errorObject['error'] = error;
-    if (payload) errorObject['payload'] = payload;
-
-    super(errorObject, errorObject.statusCode);
+    super(ErrorCode.Forbidden_Resource, error, HttpStatus.FORBIDDEN, payload);
   }
 }
 
-export class Unauthorized extends HttpException {
+export class Unauthorized extends CustomExceptionFactory {
   /**
    *
    * @example
@@ -64,11 +64,25 @@ export class Unauthorized extends HttpException {
    *    throw Unauthorized("This is error description", { payload: "This is payload" })
    */
   constructor(error?: string | HttpStatus | any, payload?: any) {
-    const errorObject = { errorCode: ErrorCode.Unauthorized, statusCode: HttpStatus.UNAUTHORIZED };
+    super(ErrorCode.Unauthorized, error, HttpStatus.UNAUTHORIZED, payload);
+  }
+}
 
-    if (error) errorObject['error'] = error;
-    if (payload) errorObject['payload'] = payload;
-
-    super(errorObject, errorObject.statusCode);
+export class UnprocessableEntity extends CustomExceptionFactory {
+  /**
+   *
+   * @example
+   *
+   *    // Common forbidden error
+   *    throw UnprocessableEntity()
+   *
+   *    // UnprocessableEntity with description message
+   *    throw UnprocessableEntity("This is error description")
+   *
+   *    // UnprocessableEntity with description message & payload data
+   *    throw UnprocessableEntity("This is error description", { payload: "This is payload" })
+   */
+  constructor(error?: string | HttpStatus | any, payload?: any) {
+    super(ErrorCode.Invalid_Input, error, HttpStatus.UNPROCESSABLE_ENTITY, payload);
   }
 }

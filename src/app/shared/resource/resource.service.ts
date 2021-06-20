@@ -81,11 +81,6 @@ export class ResourceService {
     return resource;
   }
 
-  // async clearAllCacheResource() {
-  // await this.connection.queryResultCache.remove(Object.values(KeyCacheRedis));
-  // await clearRedisData(config.appName);
-  // }
-
   async createResourceSingle(params: ICreateResourceSingle) {
     const resource = await this.resourceRepository.findOne({
       type: params.type,
@@ -105,14 +100,6 @@ export class ResourceService {
     });
     return resource;
   }
-
-  // async clearCacheResourceRedis(transaction?: EntityManager) {
-  //   if (transaction) {
-  //     await transaction.connection.queryResultCache.remove([KeyCacheRedis.RESOURCE, KeyCacheRedis.REPORT_REASON]);
-  //   } else {
-  //     await this.connection.queryResultCache.remove([KeyCacheRedis.RESOURCE, KeyCacheRedis.REPORT_REASON]);
-  //   }
-  // }
 }
 
 export interface IListResource {

@@ -1,8 +1,9 @@
 import { Public } from '$core/decorators/public.decorator';
+import { CustomParseIntPipe } from '$core/pipes/validation.pipe';
 import { handleInputPaging } from '$helpers/utils';
 import { validate } from '$helpers/validate';
 import { Permissions, ResourceType } from '$types/enums';
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { RequirePermissions } from '../authorization/permissions.decorator';
 import {
   addResourceSchema,
@@ -25,7 +26,7 @@ export class ResourceController {
 
   @Post('/')
   @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
-  async createResource(@Body() body, @Param('userId', ParseIntPipe) userId: number) {
+  async createResource(@Body() body, @Param('userId', CustomParseIntPipe) userId: number) {
     validate(addResourceSchema, body);
     await this.resourceService.createResource(userId, body);
     return;
@@ -33,13 +34,13 @@ export class ResourceController {
 
   @Get('/:resourceId')
   @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
-  async getDetailResource(@Param('resourceId', ParseIntPipe) resourceId: number) {
+  async getDetailResource(@Param('resourceId', CustomParseIntPipe) resourceId: number) {
     return await this.resourceService.getDetailResource(resourceId);
   }
 
   @Put('/:resourceId')
   @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
-  async updateResource(@Body() body, @Param('resourceId', ParseIntPipe) resourceId: number) {
+  async updateResource(@Body() body, @Param('resourceId', CustomParseIntPipe) resourceId: number) {
     validate(updateResourceSchema, body);
     await this.resourceService.updateResource(resourceId, body);
     return;
@@ -47,18 +48,11 @@ export class ResourceController {
 
   @Put('/update-status/:resourceId')
   @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
-  async updateStatusResource(@Body() body, @Param('resourceId', ParseIntPipe) resourceId: number) {
+  async updateStatusResource(@Body() body, @Param('resourceId', CustomParseIntPipe) resourceId: number) {
     validate(updateStatusResourceSchema, body);
     await this.resourceService.updateStatusResource(resourceId, body);
     return;
   }
-
-  // @Post('/clear-cache')
-  // @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
-  // async clearCacheResource(req: Request) {
-  //   await this.resourceService.clearAllCacheResource();
-  //   return;
-  // }
 
   @Post('/create-resource-single')
   @RequirePermissions(Permissions.RESOURCE_MANAGEMENT)
@@ -70,7 +64,7 @@ export class ResourceController {
 
   @Public()
   @Get('/resource-by-type/:type')
-  async getResourceByType(@Param('type', ParseIntPipe) type: ResourceType) {
+  async getResourceByType(@Param('type', CustomParseIntPipe) type: ResourceType) {
     return await this.resourceService.getResourceByType(type);
   }
 }
