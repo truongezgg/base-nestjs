@@ -1,5 +1,6 @@
 import User from '$database/entities/User';
 import { Exception } from '$helpers/exception';
+import { convertToObject } from '$helpers/utils';
 import { CommonStatus, ErrorCode, Permissions } from '$types/enums';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -59,7 +60,7 @@ export class AuthorizationService {
       item.hasPermission = permissions.includes(item.id) ? 1 : 0;
       return item;
     });
-    return this.convertToObject(listPermissionAdvance, 'groupName');
+    return convertToObject(listPermissionAdvance, 'groupName');
   }
 
   async getRolePermissions(roleId: number) {
@@ -138,19 +139,5 @@ export class AuthorizationService {
     const rolePermissions = await this.rolePermissionRepository.find({ roleId });
     const permissions: Array<number> = rolePermissions.map((item) => item.permissionId);
     return permissions;
-  }
-
-  convertToObject(data: Array<Object>, key: string): { [key: string]: Array<any> } {
-    const result = {};
-    for (let i = 0; i < data.length; i++) {
-      const element = data[i];
-      const keyEl = element[key];
-      if (!result[keyEl]) {
-        result[keyEl] = [];
-      }
-      delete element[key];
-      result[keyEl].push(element);
-    }
-    return result;
   }
 }

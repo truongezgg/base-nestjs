@@ -8,6 +8,7 @@ export enum ErrorCode {
   Forbidden_Resource = 'Forbidden_Resource',
   Unauthorized = 'Unauthorized',
   Resource_Already_Exists = 'Resource_Already_Exists',
+  Can_Not_Disable_Default_language = 'Can_Not_Disable_Default_language',
 }
 
 export enum UserType {
@@ -29,6 +30,7 @@ export enum Permissions {
   PERMISSION_MANAGEMENT = 1,
   CONFIG_MANAGEMENT = 2,
   RESOURCE_MANAGEMENT = 3,
+  LANGUAGE_MANAGEMENT = 4,
 }
 
 export enum CommonStatus {
