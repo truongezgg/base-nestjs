@@ -33,6 +33,7 @@
     "dotenv": "^8.2.0",
     "flat": "^5.0.2",
     "helmet": "^4.5.0",
+    "log4js": "^6.3.0",
     "module-alias": "^2.2.2",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",

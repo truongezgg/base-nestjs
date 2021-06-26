@@ -1,10 +1,12 @@
 require('dotenv').config();
 import 'module-alias/register';
+import '$helpers/logger';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as helmet from 'helmet';
 import config from '$config';
 import { AppModule } from '$app/app.module';
+import { getLogger } from 'log4js';
 
 /**
  * https://docs.nestjs.com/first-steps
@@ -27,11 +29,13 @@ import { AppModule } from '$app/app.module';
  * You should see the Hello World! message.
  */
 (async () => {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: ['log', 'error', 'warn', 'debug', 'verbose'],
+  });
 
   app.enableCors();
   app.use(helmet());
 
   await app.listen(config.SERVER_PORT);
-  console.log(`Server is running on port ${config.SERVER_PORT}`);
+  getLogger().info(`Server is running on port ${config.SERVER_PORT}`);
 })();

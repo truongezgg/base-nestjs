@@ -5,6 +5,7 @@
 
 .env
 node_modules
+logs
 
 # User-specific stuff:
 .idea/**/workspace.xml

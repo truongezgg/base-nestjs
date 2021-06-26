@@ -1,14 +1,27 @@
 import { ErrorCode } from '$types/enums';
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { getLogger } from 'log4js';
+const logger = getLogger('Exception');
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
+    const request = context.getRequest<Request>();
 
-    console.log(exception);
+    Object.assign(exception, {
+      request: {
+        method: request.method,
+        url: request.url,
+        body: request.body,
+        ip: request.ip,
+        authorization: request.headers?.authorization,
+        user: request.user,
+      },
+    });
+    logger.error(exception);
 
     const { statusCode, ...errorObject } = formatErrorObject(exception);
 
