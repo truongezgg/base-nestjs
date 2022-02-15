@@ -11,7 +11,7 @@ export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
   @Get('/')
   @RequirePermissions(Permissions.CONFIG_MANAGEMENT)
-  async getLis(@Query() query) {
+  async getList(@Query() query) {
     return await this.configService.getListConfig(query);
   }
 

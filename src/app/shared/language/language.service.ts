@@ -4,13 +4,14 @@ import { CommonStatus, ErrorCode } from '$types/enums';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
-import { ConfigKeys, ConfigService } from '../config/config.service';
+import { ConfigService } from '../config/config.service';
 import Language from './entities/Language';
 import LanguageEnv from './entities/LanguageEnv';
 import LanguageKey from './entities/LanguageKey';
 import LanguageTranslation from './entities/LanguageTranslation';
 import * as flatten from 'flat';
 
+const LANGUAGE_VERSION = 'LANGUAGE_VERSION';
 @Injectable()
 export class LanguageService {
   constructor(
@@ -150,7 +151,7 @@ export class LanguageService {
       await languageKeyRepository.save(params);
       await languageTranslationRepository.save(translations);
       //   await clearRedisData(KeyCacheRedis.LANGUAGE);
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.LANGUAGE_VERSION);
+      await this.configService.updateVersionConfig(transaction, LANGUAGE_VERSION);
     });
   }
 
@@ -169,7 +170,7 @@ export class LanguageService {
       await languageKeyRepository.save(params);
       await languageTranslationRepository.save(translations);
       //   await clearRedisData(KeyCacheRedis.LANGUAGE);
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.LANGUAGE_VERSION);
+      await this.configService.updateVersionConfig(transaction, LANGUAGE_VERSION);
     });
   }
 
@@ -219,7 +220,7 @@ export class LanguageService {
       await languageRepository.save(params.languageKey);
       await languageTranslationRepository.save(params.languageTranslation);
       //   await clearRedisData(KeyCacheRedis.LANGUAGE);
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.LANGUAGE_VERSION);
+      await this.configService.updateVersionConfig(transaction, LANGUAGE_VERSION);
     });
   }
 

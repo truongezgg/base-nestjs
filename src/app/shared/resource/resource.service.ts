@@ -4,8 +4,10 @@ import { CommonStatus, ErrorCode, ResourceType } from '$types/enums';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Not, Repository } from 'typeorm';
-import { ConfigKeys, ConfigService } from '../config/config.service';
 import Resource from './entities/Resource';
+import { ConfigService } from '../config/config.service';
+
+const RESOURCE_VERSION = 'RESOURCE_VERSION';
 
 @Injectable()
 export class ResourceService {
@@ -53,7 +55,7 @@ export class ResourceService {
     params.createdBy = userId;
     return await this.connection.transaction(async (transaction) => {
       // await clearCacheResourceRedis(transaction);
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.RESOURCE_VERSION);
+      await this.configService.updateVersionConfig(transaction, RESOURCE_VERSION);
       return await transaction.getRepository(Resource).save(params);
     });
   }
@@ -62,7 +64,7 @@ export class ResourceService {
     await this.connection.transaction(async (transaction) => {
       const resourceRepository = transaction.getRepository(Resource);
       await resourceRepository.update(resourceId, { ...params });
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.RESOURCE_VERSION);
+      await this.configService.updateVersionConfig(transaction, RESOURCE_VERSION);
     });
     return;
   }
@@ -70,7 +72,7 @@ export class ResourceService {
   async updateStatusResource(resourceId: number, params: IUpdateStatusResource) {
     return await this.connection.transaction(async (transaction) => {
       // await clearCacheResourceRedis(transaction);
-      await this.configService.updateVersionConfig(transaction, ConfigKeys.RESOURCE_VERSION);
+      await this.configService.updateVersionConfig(transaction, RESOURCE_VERSION);
       return await this.resourceRepository.update(resourceId, { ...params });
     });
   }

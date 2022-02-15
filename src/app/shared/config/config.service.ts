@@ -5,11 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import Config from './entities/Config';
 
-export enum ConfigKeys {
-  RESOURCE_VERSION = 'RESOURCE_VERSION',
-  LANGUAGE_VERSION = 'LANGUAGE_VERSION',
-}
-
 @Injectable()
 export class ConfigService {
   constructor(@InjectRepository(Config) private configRepository: Repository<Config>) {}
@@ -23,7 +18,6 @@ export class ConfigService {
         'config.value',
         'config.type',
         'config.order',
-        'config.metadata',
         'config.isSystem',
         'config.createdBy',
       ]);
@@ -47,15 +41,17 @@ export class ConfigService {
   // Insert key config if not exists.
   // Increment value of key.
   // Clear cache redis.
-  async updateVersionConfig(transaction: EntityManager, configKeys: ConfigKeys) {
+  async updateVersionConfig(transaction: EntityManager, configKeys: string) {
     await transaction.query(
       'INSERT INTO config (`key`, `name`, `value`, `is_system`, `created_by`, `order`) ' +
         'SELECT temp.* FROM ( ' +
         'SELECT ? as `key`, ? as `name`, 0 as `value`, 1 as is_system, 1 as created_by, 0 as `order`) as temp ' +
         'WHERE NOT EXISTS ( SELECT `key` FROM config WHERE `key` = ?) LIMIT 1',
-      [configKeys, configKeys, configKeys],
+      [configKeys, configKeys, configKeys]
     );
-    await transaction.query('UPDATE config SET `value` = IFNULL(`value`, 0) + 1  WHERE `key` = ?', [configKeys]);
+    await transaction.query('UPDATE config SET `value` = IFNULL(`value`, 0) + 1  WHERE `key` = ?', [
+      configKeys,
+    ]);
     // await transaction.connection.queryResultCache.remove([KeyCacheRedis.CONFIG]);
   }
 }
