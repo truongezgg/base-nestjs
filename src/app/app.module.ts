@@ -9,9 +9,10 @@ import { PermissionsGuard } from '$app/shared/authorization/permissions.guard';
 import { SharedModule } from '$shared/shared.module';
 import { AdminModule } from '$admin/admin.module';
 import { ClientModule } from '$client/client.module';
+import { ConfigModule } from '@app/config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule],
+  imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule, ConfigModule],
   providers: [
     {
       provide: APP_FILTER,

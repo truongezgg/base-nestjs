@@ -1,8 +1,9 @@
+import { RequirePermissions } from '$app/shared/authorization/permissions.decorator';
+import { Public } from '$core/decorators/public.decorator';
 import { Exception } from '$helpers/exception';
 import { validate } from '$helpers/validate';
 import { ErrorCode, Permissions } from '$types/enums';
 import { Body, Controller, Get, Put, Query } from '@nestjs/common';
-import { RequirePermissions } from '../authorization/permissions.decorator';
 import { updateConfigSchema } from './config.schema';
 import { ConfigService } from './config.service';
 

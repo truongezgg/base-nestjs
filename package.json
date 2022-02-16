@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -78,7 +78,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -86,7 +86,7 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^\\$config": "<rootDir>/config",
@@ -98,8 +98,14 @@
       "^\\$admin/(.*)$": "<rootDir>/app/admin/$1",
       "^\\$client/(.*)$": "<rootDir>/app/client/$1",
       "^\\$app/(.*)$": "<rootDir>/app/$1",
-      "^\\$core/(.*)$": "<rootDir>/core/$1"
-    }
+      "^\\$core/(.*)$": "<rootDir>/core/$1",
+      "@app/config/(.*)": "<rootDir>/libs/config/src/$1",
+      "@app/config": "<rootDir>/libs/config/src"
+    },
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ]
   },
   "_moduleAliases": {
     "$database": "dist/database",

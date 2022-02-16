@@ -26,11 +26,11 @@ export class CreateTableUser1644924398777 implements MigrationInterface {
     const hashedPassword = await hash(process.env.SUPER_ADMIN_PASSWORD, Number(process.env.BCRYPT_HASH_ROUNDS));
 
     const isExist = await queryRunner.query(
-      `SELECT COUNT(1) FROM \`${process.env.MYSQL_DBNAME}\`.\`user\` WHERE \`email\`=?`,
+      `SELECT COUNT(1) as total FROM \`${process.env.MYSQL_DBNAME}\`.\`user\` WHERE \`email\`=?`,
       [process.env.SUPER_ADMIN_EMAIL],
     );
 
-    if (!isExist) {
+    if (!Number(isExist.total)) {
       await queryRunner.query(`INSERT INTO
       \`${process.env.MYSQL_DBNAME}\`.\`user\` (\`email\`,
       \`password\`,

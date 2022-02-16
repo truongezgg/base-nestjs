@@ -10,9 +10,21 @@ module.exports = {
   logging: true,
   charset: 'utf8mb4',
   migrationsTableName: 'typeorm_migration',
-  entities: ['dist/database/entities/**/*.js', 'dist/app/shared/**/entities/**/*.js'],
-  migrations: ['dist/database/migrations/**/*.js', 'dist/app/shared/**/migrations/**/*.js'],
-  subscribers: ['dist/database/subscribers/*.js', 'dist/app/shared/**/subscribers/**/*.js'],
+  entities: [
+    'dist/src/database/entities/**/*.js',
+    'dist/src/app/shared/**/entities/**/*.js',
+    'dist/libs/**/entities/*.js',
+  ],
+  migrations: [
+    'dist/src/database/migrations/**/*.js',
+    'dist/src/app/shared/**/migrations/**/*.js',
+    'dist/libs/**/migrations/**/*.js',
+  ],
+  subscribers: [
+    'dist/src/database/subscribers/*.js',
+    'dist/src/app/shared/**/subscribers/**/*.js',
+    'dist/libs/**/subscribers/**/*.js',
+  ],
   timezone: 'Z',
   cli: {
     entitiesDir: 'src/database/entities',

@@ -1,5 +1,9 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
   "rootDir": "./",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
@@ -15,6 +19,8 @@
     "^\\$admin/(.*)$": "<rootDir>/../src/app/admin/$1",
     "^\\$client/(.*)$": "<rootDir>/../src/app/client/$1",
     "^\\$app/(.*)$": "<rootDir>/../src/app/$1",
-    "^\\$core/(.*)$": "<rootDir>/../src/core/$1"
+    "^\\$core/(.*)$": "<rootDir>/../src/core/$1",
+    "@app/config/(.*)": "<rootDir>/../libs/config/src/$1",
+    "@app/config": "<rootDir>/../libs/config/src"
   }
 }
