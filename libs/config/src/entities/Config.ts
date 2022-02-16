@@ -14,9 +14,6 @@ export default class Config {
   @Column('varchar', { name: 'type', nullable: true, length: 50 })
   type: string | null;
 
-  @Column('text', { name: 'metadata', nullable: true })
-  metadata: string | null;
-
   @Column('tinyint', { name: 'order', nullable: true })
   order: number | null;
 

@@ -1,5 +1,4 @@
 import { RequirePermissions } from '$app/shared/authorization/permissions.decorator';
-import { Public } from '$core/decorators/public.decorator';
 import { Exception } from '$helpers/exception';
 import { validate } from '$helpers/validate';
 import { ErrorCode, Permissions } from '$types/enums';
