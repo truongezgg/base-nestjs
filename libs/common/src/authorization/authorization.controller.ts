@@ -1,8 +1,7 @@
 import { CustomParseIntPipe } from '$core/pipes/validation.pipe';
 import { validate } from '$helpers/validate';
-import { ErrorCode, Permissions } from '$types/enums';
+import { Permissions } from '$types/enums';
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { addRoleSchema, updateRolePermissionsSchema, updateRoleSchema } from './authorization.schema';
 import { AuthorizationService } from './authorization.service';
 import { RequirePermissions } from './permissions.decorator';

@@ -1,10 +1,10 @@
-import { PERMISSIONS_KEY } from '$app/shared/authorization/permissions.decorator';
 import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
 import { Exception, Forbidden } from '$helpers/exception';
 import { ErrorCode, Permissions, UserType } from '$types/enums';
 import { Injectable, CanActivate, ExecutionContext, HttpStatus, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthorizationService } from './authorization.service';
+import { PERMISSIONS_KEY } from './permissions.decorator';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {

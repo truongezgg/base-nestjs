@@ -18,8 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:run": "rimraf dist && nest build && typeorm migration:run",
-    "migration:revert": "rimraf dist && nest build && typeorm migration:revert"
+    "migration:run": "typeorm migration:run",
+    "migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
@@ -29,6 +29,7 @@
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^7.1.5",
+    "@nestjsplus/nestjs-package-starter": "file:../nestjs-package-starter",
     "ajv": "^8.1.0",
     "ajv-formats": "^2.0.2",
     "bcrypt": "^5.0.1",
@@ -44,7 +45,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
-    "typeorm": "^0.2.32"
+    "typeorm": "^0.2.32",
+    "uninstall": "0.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
@@ -99,8 +101,8 @@
       "^\\$client/(.*)$": "<rootDir>/app/client/$1",
       "^\\$app/(.*)$": "<rootDir>/app/$1",
       "^\\$core/(.*)$": "<rootDir>/core/$1",
-      "@app/config/(.*)": "<rootDir>/libs/config/src/$1",
-      "@app/config": "<rootDir>/libs/config/src"
+      "@app/common/(.*)": "<rootDir>/libs/common/src/$1",
+      "@app/common": "<rootDir>/libs/common/src"
     },
     "roots": [
       "<rootDir>/src/",

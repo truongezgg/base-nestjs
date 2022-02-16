@@ -21,6 +21,10 @@
     "^\\$app/(.*)$": "<rootDir>/../src/app/$1",
     "^\\$core/(.*)$": "<rootDir>/../src/core/$1",
     "@app/config/(.*)": "<rootDir>/../libs/config/src/$1",
-    "@app/config": "<rootDir>/../libs/config/src"
+    "@app/config": "<rootDir>/../libs/config/src",
+    "@app/resource/(.*)": "<rootDir>/../libs/resource/src/$1",
+    "@app/resource": "<rootDir>/../libs/resource/src",
+    "@app/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@app/common": "<rootDir>/../libs/common/src"
   }
 }

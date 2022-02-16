@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Not, Repository } from 'typeorm';
 import Resource from './entities/Resource';
-import { ConfigService } from '@app/config';
+import { ConfigService } from '@app/common/config';
 
 const RESOURCE_VERSION = 'RESOURCE_VERSION';
 

@@ -7,7 +7,7 @@ export default class Resource {
   @Column({ name: 'name', type: 'varchar', length: 250 })
   name: string;
 
-  @Column({ name: 'value', type: 'text', nullable: true })
+  @Column({ name: 'value', type: 'varchar', length: 250, nullable: true })
   value: string;
 
   @Column({ name: 'status', type: 'tinyint', default: 1 })

@@ -2,13 +2,13 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "projects": {
-    "config": {
+    "common": {
       "type": "library",
-      "root": "libs/config",
+      "root": "libs/common",
       "entryFile": "index",
-      "sourceRoot": "libs/config/src",
+      "sourceRoot": "libs/common/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/config/tsconfig.lib.json"
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     }
   },

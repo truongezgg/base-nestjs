@@ -23,8 +23,8 @@
       "$helpers/*": ["src/helpers/*"],
       "$types/*": ["src/types/*"],
       "$config": ["src/config"],
-      "@app/config": ["libs/config/src"],
-      "@app/config/*": ["libs/config/src/*"]
+      "@app/common": ["libs/common/src"],
+      "@app/common/*": ["libs/common/src/*"]
     }
   }
 }

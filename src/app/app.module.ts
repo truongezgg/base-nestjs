@@ -5,14 +5,14 @@ import { AllExceptionsFilter } from '$core/filters/http-exception.filter';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TransformResponseInterceptor } from '$core/interceptors/transform-res.interceptor';
 import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
-import { PermissionsGuard } from '$app/shared/authorization/permissions.guard';
 import { SharedModule } from '$shared/shared.module';
 import { AdminModule } from '$admin/admin.module';
 import { ClientModule } from '$client/client.module';
-import { ConfigModule } from '@app/config';
+import { PermissionsGuard } from '@app/common/authorization/permissions.guard';
+import { CommonModule } from '@app/common';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule, ConfigModule],
+  imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule, CommonModule],
   providers: [
     {
       provide: APP_FILTER,

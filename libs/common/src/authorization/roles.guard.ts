@@ -1,9 +1,9 @@
 import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
-import { ROLES_KEY } from '$app/shared/authorization/roles.decorator';
 import { Exception } from '$helpers/exception';
 import { ErrorCode, Role } from '$types/enums';
 import { Injectable, CanActivate, ExecutionContext, HttpStatus } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { ROLES_KEY } from './roles.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
