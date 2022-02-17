@@ -16,7 +16,6 @@ export enum ErrorCode {
 export enum UserType {
   CLIENT = 'CLIENT',
   ADMIN = 'ADMIN',
-  SUPER_ADMIN = 'SUPER_ADMIN',
 }
 
 export enum TokenType {
