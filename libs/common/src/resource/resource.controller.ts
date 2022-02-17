@@ -13,7 +13,7 @@ import {
 } from './resource.schema';
 import { ResourceService } from './resource.service';
 
-@Controller('resource')
+@Controller('cms/resource')
 export class ResourceController {
   constructor(private readonly resourceService: ResourceService) {}
 

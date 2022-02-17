@@ -4,6 +4,6 @@ import { ConfigModule, LanguageModule, ResourceModule, AuthorizationModule } fro
 @Module({
   imports: [ConfigModule, AuthorizationModule, ResourceModule, LanguageModule],
   controllers: [],
-  exports: [AuthorizationModule, ConfigModule],
+  exports: [ConfigModule, AuthorizationModule, ResourceModule, LanguageModule],
 })
 export class CommonModule {}

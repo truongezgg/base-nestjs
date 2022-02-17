@@ -3,7 +3,7 @@ import { ResourceService } from './resource.service';
 import { ResourceController } from './resource.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Resource from './entities/Resource';
-import { ConfigModule } from '@app/common/config';
+import { ConfigModule } from '@libs/common/config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Resource]), ConfigModule],

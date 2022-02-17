@@ -101,8 +101,8 @@
       "^\\$client/(.*)$": "<rootDir>/app/client/$1",
       "^\\$app/(.*)$": "<rootDir>/app/$1",
       "^\\$core/(.*)$": "<rootDir>/core/$1",
-      "@app/common/(.*)": "<rootDir>/libs/common/src/$1",
-      "@app/common": "<rootDir>/libs/common/src"
+      "@libs/common/(.*)": "<rootDir>/libs/common/src/$1",
+      "@libs/common": "<rootDir>/libs/common/src"
     },
     "roots": [
       "<rootDir>/src/",

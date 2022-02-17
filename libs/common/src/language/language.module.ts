@@ -6,7 +6,7 @@ import Language from './entities/Language';
 import LanguageEnv from './entities/LanguageEnv';
 import LanguageKey from './entities/LanguageKey';
 import LanguageTranslation from './entities/LanguageTranslation';
-import { ConfigModule } from '@app/common/config';
+import { ConfigModule } from '@libs/common/config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Language, LanguageEnv, LanguageKey, LanguageTranslation]), ConfigModule],

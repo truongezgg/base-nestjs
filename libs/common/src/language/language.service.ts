@@ -4,7 +4,7 @@ import { CommonStatus, ErrorCode } from '$types/enums';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
-import { ConfigService } from '@app/common/config';
+import { ConfigService } from '@libs/common/config';
 import Language from './entities/Language';
 import LanguageEnv from './entities/LanguageEnv';
 import LanguageKey from './entities/LanguageKey';

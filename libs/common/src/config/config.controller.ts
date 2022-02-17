@@ -6,7 +6,7 @@ import { RequirePermissions } from '../authorization/permissions.decorator';
 import { updateConfigSchema } from './config.schema';
 import { ConfigService } from './config.service';
 
-@Controller('config')
+@Controller('cms/config')
 export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
   @Get('/')

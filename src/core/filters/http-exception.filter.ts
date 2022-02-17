@@ -17,7 +17,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         url: request.url,
         body: request.body,
         ip: request.ip,
-        authorization: request.headers?.authorization,
+        // authorization: request.headers?.authorization,
         user: request.user,
       },
     });

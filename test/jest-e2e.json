@@ -1,9 +1,5 @@
 {
-  "moduleFileExtensions": [
-    "js",
-    "json",
-    "ts"
-  ],
+  "moduleFileExtensions": ["js", "json", "ts"],
   "rootDir": "./",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
@@ -24,7 +20,7 @@
     "@app/config": "<rootDir>/../libs/config/src",
     "@app/resource/(.*)": "<rootDir>/../libs/resource/src/$1",
     "@app/resource": "<rootDir>/../libs/resource/src",
-    "@app/common/(.*)": "<rootDir>/../libs/common/src/$1",
-    "@app/common": "<rootDir>/../libs/common/src"
+    "@libs/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@libs/common": "<rootDir>/../libs/common/src"
   }
 }

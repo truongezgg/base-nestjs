@@ -8,8 +8,8 @@ import { JwtAuthGuard } from '$app/shared/auth/jwt-auth.guard';
 import { SharedModule } from '$shared/shared.module';
 import { AdminModule } from '$admin/admin.module';
 import { ClientModule } from '$client/client.module';
-import { PermissionsGuard } from '@app/common/authorization/permissions.guard';
-import { CommonModule } from '@app/common';
+import { PermissionsGuard } from '@libs/common';
+import { CommonModule } from '@libs/common';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), SharedModule, AdminModule, ClientModule, CommonModule],

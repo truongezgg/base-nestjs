@@ -1,5 +1,5 @@
 import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
-import { Exception } from '$helpers/exception';
+import { Exception, Forbidden } from '$helpers/exception';
 import { ErrorCode, Role } from '$types/enums';
 import { Injectable, CanActivate, ExecutionContext, HttpStatus } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -23,11 +23,7 @@ export class RolesGuard implements CanActivate {
     const hasPrivilege = user?.roles?.some((role: Role) => roles.includes(role));
 
     if (!hasPrivilege) {
-      throw new Exception(
-        ErrorCode.Forbidden_Resource,
-        'You do not have privileges to access this API!',
-        HttpStatus.FORBIDDEN,
-      );
+      throw new Forbidden('You do not have privileges to access this API!');
     }
 
     return true;
