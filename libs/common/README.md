@@ -21,41 +21,54 @@ export enum ErrorCode {
 }
 ```
 
-# Implement
+# Remove common lib
 
-1. Clone code into shared folder(libs)
-
-   `git clone git@git.amela.vn:hades-base/nestjs-api/config.git ./libs/config`
-
-2. import ConfigModule and ConfigService to use
+1. In src/app/app.module.ts
 
 ```Typescript
-
-// In Module file.
-import { ConfigModule, ConfigService } from '@app/config';
+// Remove CommonModule
+import { CommonModule } from '@libs/common';
 
 @Module({
-  imports: [..., ConfigModule],
-  controllers: [...],
-  exports: [...],
+  imports: [..., CommonModule],
+  providers: [
+    ...
+  ],
 })
-export class ExampleModule {}
-```
-
-```Typescript
-
-// In Service file
-import { ConfigService } from '@app/config';
-
-@Injectable()
-export class ExampleService {
-  constructor(private configService: ConfigService, ...) {}
+export class AppModule {
   ...
 }
 
 ```
 
-```bash
-# Run migration to change database
-$ npm run migration:run
+2. In nest-cli.json
+
+```javascript
+// Remove common in projects
+{
+  projects: {
+    ...
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    }
+  },
+  ...
+  }
+}
+
+```
+
+3. In package.json & tsconfig.json
+
+Remove flowing line.
+
+```javascript
+"@libs/common": "...",
+"@libs/common/(.*)": "...",
 ```
