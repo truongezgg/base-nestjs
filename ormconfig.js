@@ -13,7 +13,7 @@ module.exports = {
   entities: [
     'dist/src/database/entities/**/*.js',
     'dist/src/app/shared/**/entities/**/*.js',
-    'dist/libs/**/entities/*.js',
+    'dist/libs/**/entities/**/*.js',
   ],
   migrations: [
     'dist/src/database/migrations/**/*.js',

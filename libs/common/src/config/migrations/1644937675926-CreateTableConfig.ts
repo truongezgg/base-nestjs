@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class CreateTableConfig1644937675926 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE IF NOT EXISTS \`config\` (
+      `CREATE TABLE \`config\` (
             \`key\` varchar(200) NOT NULL COMMENT 'Config key',
             \`name\` varchar(255) NOT NULL COMMENT 'Config name',
             \`value\` text NOT NULL COMMENT 'Config value of key',

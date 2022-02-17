@@ -5,7 +5,7 @@ export class CreateTableUser1644924398777 implements MigrationInterface {
   emailIDX = 'IDX_email_e12875dfb3b1d92d7d7c5377e2';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`CREATE TABLE IF NOT EXISTS \`user\` (
+    await queryRunner.query(`CREATE TABLE \`user\` (
             \`id\` bigint UNSIGNED AUTO_INCREMENT,
             \`email\` varchar(255) NOT NULL,
             \`password\` varchar(100) NOT NULL,

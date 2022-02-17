@@ -17,21 +17,7 @@ export class PostRefactoring1644924169165 implements MigrationInterface {
             UNIQUE INDEX \`IDX_e12875dfb3b1d92d7d7c5377e2\` (\`email\`),
             PRIMARY KEY (\`id\`)
             ) ENGINE=InnoDB`);
-    await queryRunner.query(
-      `CREATE TABLE \`permission_group\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(150) NOT NULL, UNIQUE INDEX \`IDX_032c209da98ae7c1a915b51c27\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
-    );
-    await queryRunner.query(
-      `CREATE TABLE \`permission\` (\`id\` int UNSIGNED NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`permission_group_id\` int NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
-    );
-    await queryRunner.query(
-      `CREATE TABLE \`role_permission\` (\`role_id\` int UNSIGNED NOT NULL, \`permission_id\` int UNSIGNED NOT NULL, PRIMARY KEY (\`role_id\`, \`permission_id\`)) ENGINE=InnoDB`,
-    );
-    await queryRunner.query(
-      `CREATE TABLE \`role\` (\`id\` int UNSIGNED NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`is_system\` tinyint NOT NULL COMMENT '1: is a system, 0: not system' DEFAULT '0', \`is_visible\` tinyint NOT NULL DEFAULT '1', UNIQUE INDEX \`IDX_ae4578dcaed5adff96595e6166\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
-    );
-    await queryRunner.query(
-      `CREATE TABLE \`user_permission\` (\`user_id\` bigint UNSIGNED NOT NULL, \`permission_id\` int NOT NULL, PRIMARY KEY (\`user_id\`, \`permission_id\`)) ENGINE=InnoDB`,
-    );
+
     await queryRunner.query(
       `CREATE TABLE \`config\` (\`key\` varchar(200) NOT NULL, \`name\` varchar(255) NOT NULL, \`value\` text NOT NULL, \`type\` varchar(50) NULL, \`metadata\` text NULL, \`order\` tinyint NULL, \`is_system\` tinyint NULL, \`created_by\` bigint UNSIGNED NULL, \`created_at\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), PRIMARY KEY (\`key\`)) ENGINE=InnoDB`,
     );
@@ -50,6 +36,7 @@ export class PostRefactoring1644924169165 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE \`resource\` (\`id\` int UNSIGNED NOT NULL AUTO_INCREMENT, \`name\` varchar(250) NOT NULL, \`value\` text NULL, \`status\` tinyint NOT NULL DEFAULT '1', \`order\` smallint NOT NULL DEFAULT '0', \`type\` smallint NOT NULL COMMENT 'Các type đã chia sẽ được định nghĩa ở enum', \`created_at\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`created_by\` int UNSIGNED NOT NULL DEFAULT '1', PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
+
     await queryRunner.query(
       `ALTER TABLE \`permission\` ADD CONSTRAINT \`FK_0248d0e8d737351620b03c3cfca\` FOREIGN KEY (\`permission_group_id\`) REFERENCES \`permission_group\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
@@ -71,13 +58,15 @@ export class PostRefactoring1644924169165 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE \`language_env\``);
     await queryRunner.query(`DROP TABLE \`language\``);
     await queryRunner.query(`DROP TABLE \`config\``);
-    await queryRunner.query(`DROP TABLE \`user_permission\``);
     await queryRunner.query(`DROP INDEX \`IDX_ae4578dcaed5adff96595e6166\` ON \`role\``);
+
+    await queryRunner.query(`DROP TABLE \`user_permission\``);
     await queryRunner.query(`DROP TABLE \`role\``);
     await queryRunner.query(`DROP TABLE \`role_permission\``);
     await queryRunner.query(`DROP TABLE \`permission\``);
-    await queryRunner.query(`DROP INDEX \`IDX_032c209da98ae7c1a915b51c27\` ON \`permission_group\``);
     await queryRunner.query(`DROP TABLE \`permission_group\``);
+
+    await queryRunner.query(`DROP INDEX \`IDX_032c209da98ae7c1a915b51c27\` ON \`permission_group\``);
     await queryRunner.query(`DROP INDEX \`IDX_e12875dfb3b1d92d7d7c5377e2\` ON \`user\``);
     await queryRunner.query(`DROP TABLE \`user\``);
   }
