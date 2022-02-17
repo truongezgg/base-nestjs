@@ -1,10 +1,11 @@
-import { PERMISSIONS_KEY } from '$app/shared/authorization/permissions.decorator';
 import { IS_PUBLIC_KEY } from '$core/decorators/public.decorator';
 import { Exception, Forbidden } from '$helpers/exception';
 import { ErrorCode, Permissions, UserType } from '$types/enums';
+import { IPayload } from '$types/interfaces';
 import { Injectable, CanActivate, ExecutionContext, HttpStatus, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthorizationService } from './authorization.service';
+import { PERMISSIONS_KEY } from './permissions.decorator';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -23,14 +24,10 @@ export class PermissionsGuard implements CanActivate {
     ]);
     if (!permissions) return true;
 
-    const { user } = context.switchToHttp().getRequest();
+    const { user } = context.switchToHttp().getRequest<{ user: IPayload; [key: string]: any }>();
 
     if (user.userType !== UserType.ADMIN) {
-      throw new Exception(
-        ErrorCode.Forbidden_Resource,
-        'You do not have permission to access this API!',
-        HttpStatus.FORBIDDEN,
-      );
+      throw new Forbidden('Only admin can access this API, You have no privileges!');
     }
 
     // TODO: Cache this API

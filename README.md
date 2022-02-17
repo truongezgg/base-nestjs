@@ -32,6 +32,11 @@
 $ npm install
 ```
 
+## Setup databases;
+
+1. Update database info into file .env
+2. Run migration(`npm run migration:run`)
+
 ## Running the app
 
 ```bash
@@ -62,6 +67,24 @@ $ npm run test:cov
 
 Link postman
 [https://www.getpostman.com/collections/791ec83061910f447833](https://www.getpostman.com/collections/791ec83061910f447833)
+
+# Migrations
+
+[Typeorm Migrations](https://typeorm.io/#/migrations)
+
+```bash
+# Run migration
+$ npm run migration:run
+
+# Revert
+$ npm run migration:revert
+
+# Create empty migration.
+npm run build && ./node_modules/typeorm/cli.js migration:create -n PostRefactoring
+
+# Generate migration from entity.
+npm run build && ./node_modules/typeorm/cli.js migration:generate -n PostRefactoring
+```
 
 ## Support
 

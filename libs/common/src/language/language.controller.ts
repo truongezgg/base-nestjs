@@ -5,7 +5,7 @@ import { Body, Controller, Post, Put } from '@nestjs/common';
 import { RequirePermissions } from '../authorization/permissions.decorator';
 import { LanguageService } from './language.service';
 
-@Controller('language')
+@Controller('cms/language')
 export class LanguageController {
   constructor(private readonly languageService: LanguageService) {}
   @Public()

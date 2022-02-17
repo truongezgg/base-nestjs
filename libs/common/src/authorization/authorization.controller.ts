@@ -1,13 +1,12 @@
 import { CustomParseIntPipe } from '$core/pipes/validation.pipe';
 import { validate } from '$helpers/validate';
-import { ErrorCode, Permissions } from '$types/enums';
+import { Permissions } from '$types/enums';
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { addRoleSchema, updateRolePermissionsSchema, updateRoleSchema } from './authorization.schema';
 import { AuthorizationService } from './authorization.service';
 import { RequirePermissions } from './permissions.decorator';
 
-@Controller('authorization')
+@Controller('cms/authorization')
 export class AuthorizationController {
   constructor(private authorizationService: AuthorizationService) {}
 
@@ -45,7 +44,7 @@ export class AuthorizationController {
     return await this.authorizationService.hiddenRole(roleId);
   }
 
-  @Put('/rolePermission/:roleId')
+  @Put('/role-permission/:roleId')
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async updateRolePermissions(@Body() body, @Param('roleId', CustomParseIntPipe) roleId: number) {
     const { permissions, changeUserPermission } = body;
@@ -54,7 +53,7 @@ export class AuthorizationController {
     return;
   }
 
-  @Get('/rolePermission/:roleId')
+  @Get('/role-permission/:roleId')
   @RequirePermissions(Permissions.PERMISSION_MANAGEMENT)
   async getRolePermissions(@Param('roleId', CustomParseIntPipe) roleId: number) {
     const permissions = await this.authorizationService.getRolePermissions(roleId);

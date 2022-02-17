@@ -40,7 +40,7 @@ describe('App (e2e)', () => {
           port: Number(process.env.MYSQL_PORT),
           username: process.env.MYSQL_USER,
           password: process.env.MYSQL_PASS,
-          database: process.env.MYSQL_NAME,
+          database: process.env.MYSQL_DBNAME,
           supportBigNumbers: true,
           synchronize: false, // Alway use migration.
           logging: false,

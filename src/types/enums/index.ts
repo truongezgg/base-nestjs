@@ -1,12 +1,14 @@
 export enum ErrorCode {
+  // Common error
   Unknown_Error = 'Unknown_Error',
   Invalid_Input = 'Invalid_Input',
   Not_Found = 'Not_Found',
-  Email_Or_Password_Not_valid = 'Email_Or_Password_Not_valid',
-  Email_Already_Exist = 'Email_Already_Exist',
   Token_Not_Exist = 'Token_Not_Exist',
   Forbidden_Resource = 'Forbidden_Resource',
   Unauthorized = 'Unauthorized',
+
+  Email_Already_Exist = 'Email_Already_Exist',
+  Email_Or_Password_Not_valid = 'Email_Or_Password_Not_valid',
   Resource_Already_Exists = 'Resource_Already_Exists',
   Can_Not_Disable_Default_language = 'Can_Not_Disable_Default_language',
 }
@@ -14,6 +16,7 @@ export enum ErrorCode {
 export enum UserType {
   CLIENT = 'CLIENT',
   ADMIN = 'ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
 }
 
 export enum TokenType {
